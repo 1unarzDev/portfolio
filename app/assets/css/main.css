@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+@layer base {
+    * {
+        cursor: none !important;
+    }
+}

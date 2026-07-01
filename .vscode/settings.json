@@ -1,0 +1,6 @@
+{
+    "tailwindCSS.experimental.configFile": {
+        "app/assets/css/main.css": "**"
+    },
+    "js/ts.tsdk.path": "node_modules/typescript/lib"
+}
