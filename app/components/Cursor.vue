@@ -59,7 +59,7 @@ onMounted(() => {
     }
     window.addEventListener('click', spawnClick)
 
-    const spawnPulse = () => {
+    const spawnPulse = (angle: number) => {
       if (!innerEl.value) return
 
       const { width, height, left, top } = innerEl.value.getBoundingClientRect()
@@ -79,6 +79,7 @@ onMounted(() => {
         zIndex: '9998',
         boxSizing: 'border-box',
         transformOrigin: 'center center',
+        transform: `rotate(${angle})`
       })
 
       document.body.appendChild(ring)
@@ -100,8 +101,8 @@ onMounted(() => {
     }
 
     const isPressed = ref(false)
-    const onMouseDown = () => { isPressed.value = true; lastPulseTime = Date.now() }
-    const onMouseUp = () => { isPressed.value = false }
+    const onMouseDown = () => { isPressed.value = true; lastPulseTime = Date.now(); }
+    const onMouseUp = () => { isPressed.value = false; }
     window.addEventListener('mousedown', onMouseDown)
     window.addEventListener('mouseup', onMouseUp)
 
@@ -124,11 +125,14 @@ onMounted(() => {
         $gsap.to(innerEl.value, {
             scaleX,
             scaleY,
-            rotation: speed > 1 ? angle : 0,
             opacity,
             duration: 0.15,
             overwrite: 'auto',
             ease: 'power2.out',
+        })
+        
+        $gsap.set(innerEl.value, {
+            rotation: angle
         })
 
         const now = Date.now()
@@ -142,7 +146,7 @@ onMounted(() => {
 
         if (isPressed.value && now - lastPulseTime > pulseInterval) {
             lastPulseTime = now
-            spawnPulse()
+            spawnPulse(angle)
         }
     }
 
