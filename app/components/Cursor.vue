@@ -139,10 +139,10 @@ onMounted(() => {
         const spawnInterval = speed > 10 ? 30 : speed > 3 ? 60 : 120
         const pulseInterval = 900
 
-        if (speed > 1 && now - lastTrailTime > spawnInterval) {
-            lastTrailTime = now
-            spawnTrail(blobX, blobY, speed, scaleX, scaleY, angle)
-        }
+        // if (speed > 1 && now - lastTrailTime > spawnInterval) {
+        //     lastTrailTime = now
+        //     spawnTrail(blobX, blobY, speed, scaleX, scaleY, angle)
+        // }
 
         if (isPressed.value && now - lastPulseTime > pulseInterval) {
             lastPulseTime = now
